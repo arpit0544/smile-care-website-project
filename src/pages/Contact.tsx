@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
-import { Phone, MapPin, Clock, MessageSquare, Whatsapp } from 'lucide-react';
+import { Phone, MapPin, Clock, MessageSquare } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Contact: React.FC = () => {
@@ -115,58 +116,57 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="bg-white rounded-xl shadow-lg p-8">
-                  <h3 className="text-2xl font-bold mb-6 gradient-text">Send Us a Message</h3>
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                        Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dental-aqua"
-                        required
-                      />
-                    </div>
+                <h3 className="text-2xl font-bold mb-6 gradient-text">Send Us a Message</h3>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-4">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dental-aqua"
+                      required
+                    />
+                  </div>
 
-                    <div className="mb-4">
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                        Phone *
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dental-aqua"
-                        required
-                      />
-                    </div>
+                  <div className="mb-4">
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                      Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dental-aqua"
+                      required
+                    />
+                  </div>
 
-                    <div className="mb-6">
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        rows={4}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dental-aqua"
-                      ></textarea>
-                    </div>
+                  <div className="mb-6">
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      rows={4}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dental-aqua"
+                    ></textarea>
+                  </div>
 
-                    <button 
-                      type="submit"
-                      className="w-full flex items-center justify-center gap-2 gradient-bg py-3 px-6 rounded-md text-white font-medium hover:opacity-90 transition-all"
-                    >
-                      <MessageSquare size={18} />
-                      Send via WhatsApp
-                    </button>
-                  </form>
-                </div>
+                  <button 
+                    type="submit"
+                    className="w-full flex items-center justify-center gap-2 gradient-bg py-3 px-6 rounded-md text-white font-medium hover:opacity-90 transition-all"
+                  >
+                    <MessageSquare size={18} />
+                    Send via WhatsApp
+                  </button>
+                </form>
               </div>
             </div>
           </div>
