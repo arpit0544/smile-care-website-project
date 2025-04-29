@@ -63,13 +63,12 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				dental: {
-					blue: "#0047FF",
-					aqua: "#3CDFDF",
-					lightBlue: "#D3E4FD",
-					lightGray: "#F3F3F3",
-					darkGray: "#8E9196",
-				},
+				// New custom colors
+				'teal-blue': '#1FB6FF',
+				'soft-purple': '#7E5BEF',
+				'ultra-light': '#F9FAFB',
+				'dark-gray': '#2E2E2E',
+				'coral': '#FF6B6B',
 			},
 			fontFamily: {
 				sans: ['Open Sans', 'sans-serif'],
@@ -154,7 +153,15 @@ export default {
 				'loader-spin': {
 					'0%': { transform: 'rotate(0deg)' },
 					'100%': { transform: 'rotate(360deg)' }
-				}
+				},
+				'rotate-3d': {
+					'0%': { transform: 'perspective(1000px) rotateY(0deg)' },
+					'100%': { transform: 'perspective(1000px) rotateY(360deg)' }
+				},
+				'icon-bounce': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-8px)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -168,7 +175,9 @@ export default {
 				'rotate-slow': 'rotate-slow 15s linear infinite',
 				'bounce-slow': 'bounce-slow 5s ease-in-out infinite',
 				'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
-				'loader-spin': 'loader-spin 1s linear infinite'
+				'loader-spin': 'loader-spin 1s linear infinite',
+				'rotate-3d': 'rotate-3d 20s linear infinite',
+				'icon-bounce': 'icon-bounce 0.6s ease infinite',
 			}
 		}
 	},

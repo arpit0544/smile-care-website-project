@@ -5,50 +5,51 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 15% 98%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 13% 18%;
 
-    --primary: 196 100% 56%;
+    --primary: 198 100% 56%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 186 100% 55%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 260 74% 65%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 13% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 220 15% 94%;
+    --accent-foreground: 220 13% 18%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 70%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 220 13% 18%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
+    /* Custom Colors */
+    --teal-blue: 198 100% 56%;
+    --soft-purple: 260 74% 65%;
+    --ultra-light-gray: 220 15% 98%;
+    --dark-gray: 220 13% 18%;
+    --coral: 0 84% 70%;
+    
+    /* Sidebar */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
@@ -59,29 +60,29 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-[#F9FAFB] text-[#2E2E2E] font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-poppins font-bold;
+    @apply font-poppins font-bold text-[#2E2E2E];
   }
 }
 
 /* Custom Styling */
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-dental-aqua to-dental-blue font-poppins;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#1FB6FF] to-[#7E5BEF] font-poppins;
 }
 
 .gradient-bg {
-  @apply bg-gradient-to-r from-dental-aqua to-dental-blue text-white;
+  @apply bg-gradient-to-r from-[#1FB6FF] to-[#7E5BEF] text-white;
 }
 
 .service-card {
-  @apply relative overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+  @apply relative overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 bg-white border border-gray-100;
 }
 
 .dental-card-hover {
-  @apply transform transition-all duration-300 hover:translate-y-[-10px] hover:shadow-xl;
+  @apply transform transition-all duration-300 hover:translate-y-[-10px] hover:shadow-xl bg-white rounded-xl border border-gray-100;
 }
 
 .animated-bg {
@@ -90,7 +91,7 @@
 
 .animated-bg::before {
   content: '';
-  @apply absolute inset-0 bg-gradient-to-r from-dental-aqua to-dental-blue opacity-10 -z-10 animate-pulse-slow;
+  @apply absolute inset-0 bg-gradient-to-r from-[#1FB6FF]/10 to-[#7E5BEF]/10 opacity-20 -z-10 animate-pulse-slow;
 }
 
 .float {
@@ -104,12 +105,25 @@
 }
 
 .appointment-btn {
-  @apply bg-gradient-to-r from-dental-aqua to-dental-blue text-white font-poppins font-medium py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2;
+  @apply bg-[#FF6B6B] text-white font-poppins font-medium py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2;
+}
+
+.secondary-btn {
+  @apply bg-gradient-to-r from-[#1FB6FF] to-[#7E5BEF] text-white font-poppins font-medium py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2;
+}
+
+/* Glassmorphism */
+.glass-card {
+  @apply bg-white/70 backdrop-blur-md border border-white/20 rounded-xl shadow-lg;
+}
+
+.neomorphic {
+  @apply bg-[#F9FAFB] rounded-xl shadow-[8px_8px_16px_#e6e6e6,-8px_-8px_16px_#ffffff];
 }
 
 /* Loading Animation */
 .loader-container {
-  @apply fixed inset-0 bg-white flex items-center justify-center z-50;
+  @apply fixed inset-0 bg-[#F9FAFB] flex items-center justify-center z-50;
 }
 
 .loader {
@@ -117,7 +131,7 @@
   height: 80px;
   border-radius: 50%;
   border: 8px solid transparent;
-  @apply border-t-dental-aqua border-b-dental-blue;
+  @apply border-t-[#1FB6FF] border-b-[#7E5BEF];
   animation: loader-spin 1s linear infinite;
 }
 
@@ -135,27 +149,14 @@
   @apply fixed bottom-6 left-6 z-40 shadow-lg rounded-full w-14 h-14 flex items-center justify-center bg-[#25D366] text-white animate-bounce-slow;
 }
 
-/* Hero Video */
-.hero-video-container {
-  @apply relative w-full h-[60vh] md:h-[80vh] overflow-hidden;
-}
-
-.hero-video {
-  @apply object-cover w-full h-full;
-}
-
-.hero-overlay {
-  @apply absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 flex flex-col items-center justify-center text-white p-4;
-}
-
 /* Navbar */
 .nav-link {
-  @apply relative text-dental-darkGray hover:text-dental-blue transition-colors duration-300;
+  @apply relative text-[#2E2E2E] hover:text-[#1FB6FF] transition-colors duration-300;
 }
 
 .nav-link::after {
   content: '';
-  @apply absolute -bottom-1 left-0 w-0 h-[2px] bg-dental-aqua transition-all duration-300;
+  @apply absolute -bottom-1 left-0 w-0 h-[2px] bg-[#1FB6FF] transition-all duration-300;
 }
 
 .nav-link:hover::after {
@@ -163,7 +164,7 @@
 }
 
 .nav-link.active {
-  @apply text-dental-blue;
+  @apply text-[#1FB6FF];
 }
 
 .nav-link.active::after {
@@ -172,17 +173,42 @@
 
 /* Treatment Cards */
 .treatment-card {
-  @apply bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2;
+  @apply bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100;
 }
 
 /* Counter Animation */
 .counter {
-  @apply font-poppins font-bold text-4xl md:text-5xl text-dental-blue;
+  @apply font-poppins font-bold text-4xl md:text-5xl text-[#1FB6FF];
 }
 
 /* Service Icons */
 .service-icon {
-  @apply w-20 h-20 text-dental-aqua mb-4;
+  @apply w-20 h-20 text-[#1FB6FF] mb-4;
+}
+
+/* 3D Carousel */
+.carousel-container {
+  @apply relative w-full h-[60vh] md:h-[80vh] overflow-hidden;
+}
+
+.carousel-controls {
+  @apply absolute z-20 inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4;
+}
+
+.carousel-control {
+  @apply w-12 h-12 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/50 transition-all duration-300;
+}
+
+.carousel-slide {
+  @apply absolute inset-0 transition-opacity duration-700 ease-in-out;
+}
+
+.carousel-content {
+  @apply absolute inset-0 z-10 flex flex-col items-center justify-center text-white p-4 bg-gradient-to-b from-black/50 to-transparent;
+}
+
+.carousel-cta {
+  @apply flex flex-col sm:flex-row gap-4 mt-8;
 }
 
 /* Custom animations */
@@ -200,4 +226,46 @@
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+/* 3D Rotation Animation */
+@keyframes rotate3d {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+
+.rotate-3d {
+  animation: rotate3d 20s linear infinite;
+}
+
+.rotate-3d:hover {
+  animation-play-state: paused;
+}
+
+/* New Styles for Cards */
+.feature-card {
+  @apply p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100;
+}
+
+/* Hover Effects */
+.hover-grow {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+.hover-glow {
+  @apply transition-all duration-300 hover:shadow-[0_0_15px_rgba(31,182,255,0.5)];
+}
+
+/* Icon Animation */
+.icon-bounce:hover svg {
+  animation: iconBounce 0.6s ease infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }

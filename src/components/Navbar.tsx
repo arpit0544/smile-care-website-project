@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
   return (
     <nav 
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        isScrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
         </div>
 
         <button 
-          className="md:hidden text-dental-blue focus:outline-none"
+          className="md:hidden text-[#1FB6FF] focus:outline-none"
           onClick={toggleMobileMenu}
         >
           <Menu size={24} />
@@ -58,45 +58,45 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-white z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden`}>
+      <div className={`fixed inset-0 bg-white/90 backdrop-blur-md z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden`}>
         <div className="flex justify-end p-4">
-          <button onClick={toggleMobileMenu} className="text-dental-blue">
+          <button onClick={toggleMobileMenu} className="text-[#1FB6FF]">
             <X size={24} />
           </button>
         </div>
         <div className="flex flex-col items-center justify-center h-full space-y-8">
           <Link to="/" 
-            className={`text-xl ${isActive('/') ? 'text-dental-blue' : 'text-dental-darkGray'}`} 
+            className={`text-xl ${isActive('/') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
             onClick={toggleMobileMenu}
           >
             Home
           </Link>
           <Link to="/about" 
-            className={`text-xl ${isActive('/about') ? 'text-dental-blue' : 'text-dental-darkGray'}`} 
+            className={`text-xl ${isActive('/about') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
             onClick={toggleMobileMenu}
           >
             About Us
           </Link>
           <Link to="/treatments" 
-            className={`text-xl ${isActive('/treatments') ? 'text-dental-blue' : 'text-dental-darkGray'}`} 
+            className={`text-xl ${isActive('/treatments') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
             onClick={toggleMobileMenu}
           >
             Treatments
           </Link>
           <Link to="/services" 
-            className={`text-xl ${isActive('/services') ? 'text-dental-blue' : 'text-dental-darkGray'}`} 
+            className={`text-xl ${isActive('/services') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
             onClick={toggleMobileMenu}
           >
             Services
           </Link>
           <Link to="/doctors" 
-            className={`text-xl ${isActive('/doctors') ? 'text-dental-blue' : 'text-dental-darkGray'}`} 
+            className={`text-xl ${isActive('/doctors') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
             onClick={toggleMobileMenu}
           >
             Doctors
           </Link>
           <Link to="/contact" 
-            className={`text-xl ${isActive('/contact') ? 'text-dental-blue' : 'text-dental-darkGray'}`} 
+            className={`text-xl ${isActive('/contact') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
             onClick={toggleMobileMenu}
           >
             Contact

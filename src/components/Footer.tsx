@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, MapPin, Clock } from 'lucide-react';
+import { Phone, MapPin, Clock, MessageSquare } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-r from-dental-blue to-dental-aqua text-white">
+    <footer className="bg-gradient-to-r from-[#1FB6FF] to-[#7E5BEF] text-white">
       <div className="container mx-auto py-12 px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           
@@ -25,12 +25,12 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-4 font-poppins">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="hover:text-dental-lightBlue transition-colors">Home</Link></li>
-              <li><Link to="/about" className="hover:text-dental-lightBlue transition-colors">About Us</Link></li>
-              <li><Link to="/treatments" className="hover:text-dental-lightBlue transition-colors">Treatments</Link></li>
-              <li><Link to="/services" className="hover:text-dental-lightBlue transition-colors">Services</Link></li>
-              <li><Link to="/doctors" className="hover:text-dental-lightBlue transition-colors">Doctors</Link></li>
-              <li><Link to="/contact" className="hover:text-dental-lightBlue transition-colors">Contact</Link></li>
+              <li><Link to="/" className="hover:text-white/80 transition-colors">Home</Link></li>
+              <li><Link to="/about" className="hover:text-white/80 transition-colors">About Us</Link></li>
+              <li><Link to="/treatments" className="hover:text-white/80 transition-colors">Treatments</Link></li>
+              <li><Link to="/services" className="hover:text-white/80 transition-colors">Services</Link></li>
+              <li><Link to="/doctors" className="hover:text-white/80 transition-colors">Doctors</Link></li>
+              <li><Link to="/contact" className="hover:text-white/80 transition-colors">Contact</Link></li>
             </ul>
           </div>
           
@@ -38,11 +38,11 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-4 font-poppins">Our Treatments</h3>
             <ul className="space-y-2">
-              <li><Link to="/treatments" className="hover:text-dental-lightBlue transition-colors">Implants</Link></li>
-              <li><Link to="/treatments" className="hover:text-dental-lightBlue transition-colors">Orthodontics</Link></li>
-              <li><Link to="/treatments" className="hover:text-dental-lightBlue transition-colors">Fillings</Link></li>
-              <li><Link to="/treatments" className="hover:text-dental-lightBlue transition-colors">Cosmetic Dentistry</Link></li>
-              <li><Link to="/treatments" className="hover:text-dental-lightBlue transition-colors">Oral Surgery</Link></li>
+              <li><Link to="/treatments" className="hover:text-white/80 transition-colors">Implants</Link></li>
+              <li><Link to="/treatments" className="hover:text-white/80 transition-colors">Orthodontics</Link></li>
+              <li><Link to="/treatments" className="hover:text-white/80 transition-colors">Fillings</Link></li>
+              <li><Link to="/treatments" className="hover:text-white/80 transition-colors">Cosmetic Dentistry</Link></li>
+              <li><Link to="/treatments" className="hover:text-white/80 transition-colors">Oral Surgery</Link></li>
             </ul>
           </div>
           
@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={18} />
-                <a href="tel:+919455535193" className="hover:text-dental-lightBlue transition-colors">+91 9455535193</a>
+                <a href="tel:+919455535193" className="hover:text-white/80 transition-colors">+91 9455535193</a>
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={18} />
