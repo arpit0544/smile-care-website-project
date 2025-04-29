@@ -181,5 +181,14 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function ({ addBase }: any) {
+			addBase({
+				'html': { 
+					scrollBehavior: 'smooth',
+				},
+			})
+		}
+	],
 } satisfies Config;

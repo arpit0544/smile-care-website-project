@@ -1,8 +1,8 @@
-
 import React from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
 import { Building, Beaker, Globe, GraduationCap } from 'lucide-react';
+import PageHeroBanner from '../components/PageHeroBanner';
 
 const Services: React.FC = () => {
   const services = [
@@ -31,15 +31,12 @@ const Services: React.FC = () => {
   return (
     <PageTransition>
       <div className="pt-20 pb-16">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-dental-blue to-dental-aqua text-white py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">Our Services</h1>
-            <p className="text-xl text-center max-w-3xl mx-auto">
-              Discover the comprehensive range of dental services we offer at Smile Care Dental Clinic
-            </p>
-          </div>
-        </div>
+        {/* Hero Section with Banner */}
+        <PageHeroBanner
+          title="Our Services"
+          subtitle="Discover the comprehensive range of dental services we offer at Smile Care Dental Clinic"
+          backgroundImage="https://images.unsplash.com/photo-1620775997990-1cade0d48d68?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80"
+        />
 
         {/* Services Section */}
         <section className="py-16 px-4">

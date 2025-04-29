@@ -20,6 +20,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsappButton from "./components/WhatsappButton";
 import LoadingScreen from "./components/LoadingScreen";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ const App = () => {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
+              <ScrollToTopButton />
               <WhatsappButton />
               <Footer />
             </>

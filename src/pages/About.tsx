@@ -1,22 +1,19 @@
-
 import React from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
 import AnimatedCounter from '../components/AnimatedCounter';
+import PageHeroBanner from '../components/PageHeroBanner';
 
 const About: React.FC = () => {
   return (
     <PageTransition>
       <div className="pt-20 pb-16">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-dental-blue to-dental-aqua text-white py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">About Us</h1>
-            <p className="text-xl text-center max-w-3xl mx-auto">
-              Discover the story behind Smile Care Dental Clinic and our commitment to excellence in dental care.
-            </p>
-          </div>
-        </div>
+        {/* Hero Section with Banner */}
+        <PageHeroBanner
+          title="About Us"
+          subtitle="Discover the story behind Smile Care Dental Clinic and our commitment to excellence in dental care."
+          backgroundImage="https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+        />
 
         {/* Clinic Introduction */}
         <section className="py-16 px-4">

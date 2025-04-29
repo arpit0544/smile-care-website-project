@@ -1,9 +1,9 @@
-
 import React from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
 import { Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageHeroBanner from '../components/PageHeroBanner';
 
 const treatmentsData = [
   {
@@ -72,15 +72,12 @@ const Treatments: React.FC = () => {
   return (
     <PageTransition>
       <div className="pt-20 pb-16">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-dental-blue to-dental-aqua text-white py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">Our Treatments</h1>
-            <p className="text-xl text-center max-w-3xl mx-auto">
-              Comprehensive dental services tailored to meet your unique needs
-            </p>
-          </div>
-        </div>
+        {/* Hero Section with Banner */}
+        <PageHeroBanner
+          title="Our Treatments"
+          subtitle="Comprehensive dental services tailored to meet your unique needs"
+          backgroundImage="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+        />
 
         {/* Treatments Grid */}
         <section className="py-16 px-4">

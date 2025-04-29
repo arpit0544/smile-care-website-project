@@ -14,9 +14,18 @@ const Home: React.FC = () => {
         {/* 3D Hero Slider */}
         <ThreeDImageSlider />
 
-        {/* Introduction Section */}
-        <section className="py-16 md:py-24 px-4 bg-[#F9FAFB]">
-          <div className="container mx-auto">
+        {/* Introduction Section with background image */}
+        <section 
+          className="py-16 md:py-24 px-4 bg-[#F9FAFB] relative"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <div className="absolute inset-0 bg-white/90"></div>
+          <div className="container mx-auto relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="glass-card p-8 rounded-2xl">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text">

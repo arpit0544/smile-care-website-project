@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
 import { Phone, MapPin, Clock, MessageSquare } from 'lucide-react';
 import { toast } from 'sonner';
+import PageHeroBanner from '../components/PageHeroBanner';
 
 const Contact: React.FC = () => {
   const [name, setName] = useState('');
@@ -36,15 +36,12 @@ const Contact: React.FC = () => {
   return (
     <PageTransition>
       <div className="pt-20 pb-16">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-dental-blue to-dental-aqua text-white py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">Contact Us</h1>
-            <p className="text-xl text-center max-w-3xl mx-auto">
-              Have questions or need to schedule an appointment? We're here to help.
-            </p>
-          </div>
-        </div>
+        {/* Hero Section with Banner */}
+        <PageHeroBanner
+          title="Contact Us"
+          subtitle="Have questions or need to schedule an appointment? We're here to help."
+          backgroundImage="https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+        />
 
         {/* Contact Information */}
         <section className="py-16 px-4">
@@ -182,7 +179,7 @@ const Contact: React.FC = () => {
             />
             <div className="mt-8 rounded-xl overflow-hidden shadow-lg">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d34504.952687216595!2d82.55272548130112!3d25.390256915548576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398fe130b9971475%3A0x535aece991711f70!2sSmile%20Care%20Dental%20Clinic%20Dr%20Rajkumar%20Yadav!5e1!3m2!1sen!2sin!4v1745905869533!5m2!1sen!2sin" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d34504.952687216595!2d82.55272548130112!3d25.390256915548576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398fe130b9971475%3A0x535aece991711f70!2sSmile%20Care%20Dental%20Clinic%20Dr%20Rajkumar%20Yadav!5e1!3m2!1sen!2sin!4v1745905869533!5m2!1sen!2sin!4v1745905869533!5m2!1sen!2sin" 
                 width="100%" 
                 height="450" 
                 style={{ border: 0 }} 
