@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,10 +14,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 196 100% 56%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 186 100% 55%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
@@ -50,44 +51,6 @@
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 }
 
 @layer base {
@@ -96,6 +59,145 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-bold;
+  }
+}
+
+/* Custom Styling */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-dental-aqua to-dental-blue font-poppins;
+}
+
+.gradient-bg {
+  @apply bg-gradient-to-r from-dental-aqua to-dental-blue text-white;
+}
+
+.service-card {
+  @apply relative overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
+}
+
+.dental-card-hover {
+  @apply transform transition-all duration-300 hover:translate-y-[-10px] hover:shadow-xl;
+}
+
+.animated-bg {
+  @apply relative;
+}
+
+.animated-bg::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-r from-dental-aqua to-dental-blue opacity-10 -z-10 animate-pulse-slow;
+}
+
+.float {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% { transform: translate(0, 0px); }
+  50% { transform: translate(0, 15px); }
+  100% { transform: translate(0, -0px); }
+}
+
+.appointment-btn {
+  @apply bg-gradient-to-r from-dental-aqua to-dental-blue text-white font-poppins font-medium py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2;
+}
+
+/* Loading Animation */
+.loader-container {
+  @apply fixed inset-0 bg-white flex items-center justify-center z-50;
+}
+
+.loader {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 8px solid transparent;
+  @apply border-t-dental-aqua border-b-dental-blue;
+  animation: loader-spin 1s linear infinite;
+}
+
+@keyframes loader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* WhatsApp Button */
+.whatsapp-button {
+  @apply fixed bottom-6 left-6 z-40 shadow-lg rounded-full w-14 h-14 flex items-center justify-center bg-[#25D366] text-white animate-bounce-slow;
+}
+
+/* Hero Video */
+.hero-video-container {
+  @apply relative w-full h-[60vh] md:h-[80vh] overflow-hidden;
+}
+
+.hero-video {
+  @apply object-cover w-full h-full;
+}
+
+.hero-overlay {
+  @apply absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 flex flex-col items-center justify-center text-white p-4;
+}
+
+/* Navbar */
+.nav-link {
+  @apply relative text-dental-darkGray hover:text-dental-blue transition-colors duration-300;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute -bottom-1 left-0 w-0 h-[2px] bg-dental-aqua transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+.nav-link.active {
+  @apply text-dental-blue;
+}
+
+.nav-link.active::after {
+  @apply w-full;
+}
+
+/* Treatment Cards */
+.treatment-card {
+  @apply bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2;
+}
+
+/* Counter Animation */
+.counter {
+  @apply font-poppins font-bold text-4xl md:text-5xl text-dental-blue;
+}
+
+/* Service Icons */
+.service-icon {
+  @apply w-20 h-20 text-dental-aqua mb-4;
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
