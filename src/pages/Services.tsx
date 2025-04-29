@@ -1,7 +1,8 @@
+
 import React from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
-import { Building, Flask, Globe, GraduationCap } from 'lucide-react';
+import { Building, Beaker, Globe, GraduationCap } from 'lucide-react';
 
 const Services: React.FC = () => {
   const services = [
@@ -11,7 +12,7 @@ const Services: React.FC = () => {
       description: "Experience comprehensive dental care in our state-of-the-art hospital setting, equipped with the latest technology and staffed by experienced professionals dedicated to your oral health.",
     },
     {
-      icon: <Flask className="service-icon" />,
+      icon: <Beaker className="service-icon" />,
       title: "Wonderful Dental Laboratory",
       description: "Our in-house dental laboratory ensures the highest quality dental prosthetics, from crowns and bridges to dentures, all custom-crafted to meet your specific needs with precision and care.",
     },
