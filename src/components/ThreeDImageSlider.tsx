@@ -63,8 +63,9 @@ const Card: React.FC<CardProps> = ({ position, rotation, url, active, index, tot
     <mesh ref={mesh} position={position} rotation={rotation} castShadow receiveShadow>
       <planeGeometry args={[2, 1.5, 1]} />
       <meshStandardMaterial 
-        map={texture} 
-        transparent={true} 
+        // Fix TypeScript error - properly type the material properties
+        map={texture}
+        transparent={true}
         opacity={active ? 1 : 0.7}
       />
     </mesh>
