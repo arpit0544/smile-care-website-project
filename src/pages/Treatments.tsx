@@ -2,7 +2,7 @@
 import React from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
-import { Tooth } from 'lucide-react';
+import { Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const treatmentsData = [
@@ -106,7 +106,7 @@ const Treatments: React.FC = () => {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2 text-dental-blue flex items-center">
-                      <Tooth size={20} className="mr-2" />
+                      <Activity size={20} className="mr-2" />
                       {treatment.title}
                     </h3>
                     <p className="text-gray-600">{treatment.description}</p>

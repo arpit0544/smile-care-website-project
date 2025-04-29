@@ -1,23 +1,22 @@
-
 import React from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
-import { Hospital, FlaskRound, International, GraduationCap } from 'lucide-react';
+import { Building, Flask, Globe, GraduationCap } from 'lucide-react';
 
 const Services: React.FC = () => {
   const services = [
     {
-      icon: <Hospital className="service-icon" />,
+      icon: <Building className="service-icon" />,
       title: "Genuine Dental Hospital",
       description: "Experience comprehensive dental care in our state-of-the-art hospital setting, equipped with the latest technology and staffed by experienced professionals dedicated to your oral health.",
     },
     {
-      icon: <FlaskRound className="service-icon" />,
+      icon: <Flask className="service-icon" />,
       title: "Wonderful Dental Laboratory",
       description: "Our in-house dental laboratory ensures the highest quality dental prosthetics, from crowns and bridges to dentures, all custom-crafted to meet your specific needs with precision and care.",
     },
     {
-      icon: <International className="service-icon" />,
+      icon: <Globe className="service-icon" />,
       title: "International Patients",
       description: "We welcome patients from around the world, offering specialized care, language assistance, and travel coordination to make your dental treatment experience seamless and comfortable.",
     },

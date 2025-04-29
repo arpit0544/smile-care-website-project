@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
 import AnimatedCounter from '../components/AnimatedCounter';
-import { Tooth, Hospital, Clock, Users, MessageSquare } from 'lucide-react';
+import { Activity, Building, Clock, Users, MessageSquare } from 'lucide-react';
 
 const Home: React.FC = () => {
   return (
@@ -88,12 +88,12 @@ const Home: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { 
-                  icon: <Tooth size={48} className="text-dental-aqua" />, 
+                  icon: <Activity size={48} className="text-dental-aqua" />, 
                   title: "Dental Implants", 
                   desc: "Restore missing teeth with permanent, natural-looking implants" 
                 },
                 { 
-                  icon: <Hospital size={48} className="text-dental-aqua" />, 
+                  icon: <Building size={48} className="text-dental-aqua" />, 
                   title: "Cosmetic Dentistry", 
                   desc: "Enhance your smile with our aesthetic dental procedures" 
                 },

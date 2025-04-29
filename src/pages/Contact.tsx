@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import PageTransition from '../components/PageTransition';
 import SectionTitle from '../components/SectionTitle';
@@ -85,7 +84,7 @@ const Contact: React.FC = () => {
 
                   <div className="flex items-start">
                     <div className="bg-dental-lightBlue p-3 rounded-full mr-4">
-                      <Whatsapp className="text-dental-blue" size={24} />
+                      <MessageSquare className="text-dental-blue" size={24} />
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-dental-blue mb-1">WhatsApp</h3>
@@ -115,8 +114,7 @@ const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <div>
-                <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="bg-white rounded-xl shadow-lg p-8">
                   <h3 className="text-2xl font-bold mb-6 gradient-text">Send Us a Message</h3>
                   <form onSubmit={handleSubmit}>
                     <div className="mb-4">
