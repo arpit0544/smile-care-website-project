@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Treatments from "./pages/Treatments";
+import TreatmentDetail from "./pages/TreatmentDetail";
 import Services from "./pages/Services";
 import Doctors from "./pages/Doctors";
 import Contact from "./pages/Contact";
@@ -51,6 +52,7 @@ const App = () => {
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/treatments" element={<Treatments />} />
+                  <Route path="/treatments/:treatmentId" element={<TreatmentDetail />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/doctors" element={<Doctors />} />
                   <Route path="/contact" element={<Contact />} />

@@ -175,6 +175,15 @@
   @apply bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2;
 }
 
+/* Enhanced Treatment Cards */
+.treatment-card .service-icon {
+  @apply transition-all duration-300;
+}
+
+.treatment-card:hover .service-icon {
+  @apply animate-bounce;
+}
+
 /* Counter Animation */
 .counter {
   @apply font-poppins font-bold text-4xl md:text-5xl text-dental-blue;
@@ -183,6 +192,28 @@
 /* Service Icons */
 .service-icon {
   @apply w-20 h-20 text-dental-aqua mb-4;
+}
+
+/* Back button animation */
+.back-btn:hover svg {
+  @apply -translate-x-1;
+}
+
+/* Treatment detail page animations */
+.animate-slide-in-right {
+  @apply transition-all duration-500 opacity-0 translate-x-10;
+}
+
+.animate-slide-in-right.show {
+  @apply opacity-100 translate-x-0;
+}
+
+.animate-fade-in {
+  @apply transition-all duration-500 opacity-0;
+}
+
+.animate-fade-in.show {
+  @apply opacity-100;
 }
 
 /* Custom animations */
