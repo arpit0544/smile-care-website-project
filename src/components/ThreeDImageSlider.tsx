@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useTexture, PerspectiveCamera, Environment, useGLTF, Float } from '@react-three/drei';
-import { Mesh, MathUtils, Vector3 } from 'three';
+import { Mesh, MathUtils, Vector3, Group } from 'three';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Calendar, Smile, Sparkles } from 'lucide-react';
 import { gsap } from 'gsap';
@@ -75,11 +74,14 @@ const Card: React.FC<CardProps> = ({
     mesh.current.scale.setScalar(
       MathUtils.lerp(
         mesh.current.scale.x, 
-        active ? 1.3 : hovered && index === hovered ? 1.1 : 1, 
+        active ? 1.3 : (hovered && index === hoveredCardIndex) ? 1.1 : 1, 
         0.1
       )
     );
   });
+  
+  // Using a non-state variable to avoid the type comparison issue
+  const hoveredCardIndex = hovered ? index : null;
   
   return (
     <mesh 
@@ -125,7 +127,7 @@ const FloatingTooth = () => {
 };
 
 const FloatingOrbits = () => {
-  const group = useRef<THREE.Group>();
+  const group = useRef<Group>(null);
   
   useFrame(({ clock }) => {
     if (!group.current) return;
@@ -133,7 +135,6 @@ const FloatingOrbits = () => {
   });
   
   return (
-    // @ts-ignore
     <group ref={group}>
       {[...Array(3)].map((_, i) => (
         <mesh key={i} position={[0, 0, 0]}>

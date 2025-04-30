@@ -65,7 +65,7 @@ const ScrollAnimationObserver: React.FC<ScrollAnimationObserverProps> = ({
     gsap.set(element, initialProps);
 
     // Create the animation with ScrollTrigger
-    const animation = gsap.to(element, {
+    const tween = gsap.to(element, {
       ...animationProps,
       duration,
       delay,
@@ -80,7 +80,7 @@ const ScrollAnimationObserver: React.FC<ScrollAnimationObserverProps> = ({
 
     return () => {
       // Clean up animation
-      animation.kill();
+      tween.kill();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, [animation, delay, duration, threshold, once]);
