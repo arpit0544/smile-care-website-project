@@ -5,6 +5,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 // Pages
 import Home from "./pages/Home";
@@ -21,6 +26,8 @@ import Footer from "./components/Footer";
 import WhatsappButton from "./components/WhatsappButton";
 import LoadingScreen from "./components/LoadingScreen";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import CustomCursor from "./components/CustomCursor";
+import SmoothScroll from "./components/SmoothScroll";
 
 const queryClient = new QueryClient();
 
@@ -45,7 +52,8 @@ const App = () => {
           {isLoading ? (
             <LoadingScreen />
           ) : (
-            <>
+            <SmoothScroll>
+              <CustomCursor />
               <Navbar />
               <main>
                 <Routes>
@@ -61,7 +69,7 @@ const App = () => {
               <ScrollToTopButton />
               <WhatsappButton />
               <Footer />
-            </>
+            </SmoothScroll>
           )}
         </BrowserRouter>
       </TooltipProvider>

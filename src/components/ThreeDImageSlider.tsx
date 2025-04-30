@@ -1,10 +1,19 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useTexture, PerspectiveCamera, Environment } from '@react-three/drei';
-import { Mesh, MathUtils } from 'three';
+import { useTexture, PerspectiveCamera, Environment, useGLTF, Float } from '@react-three/drei';
+import { Mesh, MathUtils, Vector3 } from 'three';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, Calendar, Smile } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Calendar, Smile, Sparkles } from 'lucide-react';
+import { gsap } from 'gsap';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Autoplay, Navigation } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+import ScrollAnimationObserver from './ScrollAnimationObserver';
 
 // Individual 3D card
 interface CardProps {
@@ -14,9 +23,22 @@ interface CardProps {
   active: boolean;
   index: number;
   totalCards: number;
+  hovered: boolean;
+  onHover: (index: number) => void;
+  onUnhover: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ position, rotation, url, active, index, totalCards }) => {
+const Card: React.FC<CardProps> = ({ 
+  position, 
+  rotation, 
+  url, 
+  active, 
+  index, 
+  totalCards, 
+  hovered,
+  onHover,
+  onUnhover
+}) => {
   const mesh = useRef<Mesh>(null);
   const texture = useTexture(url);
   
@@ -45,7 +67,7 @@ const Card: React.FC<CardProps> = ({ position, rotation, url, active, index, tot
     mesh.current.position.z = MathUtils.lerp(mesh.current.position.z, targetZ, 0.05);
     mesh.current.position.y = MathUtils.lerp(
       mesh.current.position.y, 
-      active ? 0.2 : 0, 
+      active ? 0.5 : 0, 
       0.05
     );
     
@@ -53,22 +75,73 @@ const Card: React.FC<CardProps> = ({ position, rotation, url, active, index, tot
     mesh.current.scale.setScalar(
       MathUtils.lerp(
         mesh.current.scale.x, 
-        active ? 1.2 : 1, 
+        active ? 1.3 : hovered && index === hovered ? 1.1 : 1, 
         0.1
       )
     );
   });
   
   return (
-    <mesh ref={mesh} position={position} rotation={rotation} castShadow receiveShadow>
+    <mesh 
+      ref={mesh} 
+      position={position} 
+      rotation={rotation} 
+      castShadow 
+      receiveShadow
+      onPointerOver={() => onHover(index)}
+      onPointerOut={onUnhover}
+    >
       <planeGeometry args={[2, 1.5, 1]} />
       <meshStandardMaterial 
-        // Fix TypeScript error - properly type the material properties
         map={texture}
         transparent={true}
         opacity={active ? 1 : 0.7}
+        metalness={0.3}
+        roughness={0.4}
       />
     </mesh>
+  );
+};
+
+// Floating dental elements
+const FloatingTooth = () => {
+  const mesh = useRef<Mesh>(null);
+
+  useFrame(({ clock }) => {
+    if (!mesh.current) return;
+    
+    mesh.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.3) * 0.2;
+    mesh.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.4) * 0.3 + clock.getElapsedTime() * 0.1;
+  });
+
+  return (
+    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+      <mesh ref={mesh} position={[3, 1, -2]} castShadow>
+        <torusGeometry args={[0.5, 0.2, 16, 32]} />
+        <meshStandardMaterial color="#ffffff" metalness={0.5} roughness={0.1} />
+      </mesh>
+    </Float>
+  );
+};
+
+const FloatingOrbits = () => {
+  const group = useRef<THREE.Group>();
+  
+  useFrame(({ clock }) => {
+    if (!group.current) return;
+    group.current.rotation.y = clock.getElapsedTime() * 0.1;
+  });
+  
+  return (
+    // @ts-ignore
+    <group ref={group}>
+      {[...Array(3)].map((_, i) => (
+        <mesh key={i} position={[0, 0, 0]}>
+          <torusGeometry args={[3 + i * 0.8, 0.04, 16, 100]} />
+          <meshStandardMaterial color={i % 2 === 0 ? '#1FB6FF' : '#7E5BEF'} transparent opacity={0.6 - i * 0.1} />
+        </mesh>
+      ))}
+    </group>
   );
 };
 
@@ -92,13 +165,15 @@ const CameraRig: React.FC<{ activeIndex: number, totalCards: number }> = ({ acti
     cameraRef.current.lookAt(0, 0, 0);
   });
   
-  return <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 1, 8]} fov={50} />;
+  return <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 1.5, 8]} fov={45} />;
 };
 
 // Main slider component
 const ThreeDImageSlider: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   // Images for the slider
   const images = [
@@ -125,6 +200,36 @@ const ThreeDImageSlider: React.FC = () => {
     'Beautiful smiles for the whole family',
   ];
   
+  // Parallax effect for hero content
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { width, height } = containerRef.current!.getBoundingClientRect();
+      
+      const x = (clientX / width - 0.5) * 20;
+      const y = (clientY / height - 0.5) * 20;
+      
+      const contentElements = containerRef.current!.querySelectorAll('.parallax-content');
+      contentElements.forEach((el, i) => {
+        const depth = 0.5 + i * 0.2;
+        gsap.to(el, {
+          x: x * depth,
+          y: y * depth,
+          duration: 1,
+          ease: "power2.out"
+        });
+      });
+    };
+    
+    containerRef.current.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      containerRef.current?.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+  
   // Auto-rotate timer
   useEffect(() => {
     if (isPaused) return;
@@ -146,24 +251,40 @@ const ThreeDImageSlider: React.FC = () => {
   
   return (
     <div 
-      className="w-full h-[80vh] relative"
+      ref={containerRef}
+      className="w-full h-[90vh] relative overflow-hidden bg-gradient-to-b from-[#0A0E17] to-[#1F2937]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
+      {/* Cyber Grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="cyber-grid"></div>
+      </div>
+      
       {/* 3D Canvas */}
-      <Canvas shadows dpr={[1, 2]}>
-        <color attach="background" args={['#F9FAFB']} />
+      <Canvas 
+        shadows 
+        dpr={[1, 2]} 
+        className="absolute inset-0 z-10"
+      >
+        <color attach="background" args={['#0A0E17']} />
         <ambientLight intensity={0.5} />
         <directionalLight 
           position={[10, 10, 5]} 
-          intensity={1} 
+          intensity={1.5} 
           castShadow 
           shadow-mapSize={[1024, 1024]}
         />
+        <pointLight position={[-5, 5, -5]} intensity={1} color="#1FB6FF" />
+        <pointLight position={[5, 5, 5]} intensity={1} color="#7E5BEF" />
         <Environment preset="city" />
         
         {/* Camera that moves around to focus on active card */}
         <CameraRig activeIndex={activeIndex} totalCards={images.length} />
+        
+        {/* Floating elements */}
+        <FloatingTooth />
+        <FloatingOrbits />
         
         {/* Render the 3D cards */}
         {images.map((url, index) => (
@@ -175,57 +296,74 @@ const ThreeDImageSlider: React.FC = () => {
             active={activeIndex === index}
             index={index}
             totalCards={images.length}
+            hovered={hoveredCardIndex === index}
+            onHover={setHoveredCardIndex}
+            onUnhover={() => setHoveredCardIndex(null)}
           />
         ))}
       </Canvas>
       
       {/* Overlay content */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent z-10 flex flex-col items-center justify-center p-4">
-        <div className="text-center max-w-2xl mx-auto text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-            {titles[activeIndex]}
-          </h1>
-          <p className="text-xl mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            {subtitles[activeIndex]}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
-            <Link to="https://wa.me/9455535193" target="_blank" className="appointment-btn">
-              <Calendar size={20} />
-              Book Appointment
-            </Link>
-            <Link to="/treatments" className="secondary-btn">
-              <Smile size={20} />
-              View Treatments
-            </Link>
-          </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent z-20 flex flex-col items-center justify-center p-4">
+        <div className="text-center max-w-3xl mx-auto text-white">
+          <ScrollAnimationObserver animation="fade-up" delay={0.2} className="mb-4">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tighter parallax-content">
+              <span className="text-gradient">{titles[activeIndex]}</span>
+            </h1>
+          </ScrollAnimationObserver>
+          
+          <ScrollAnimationObserver animation="fade-up" delay={0.4} className="mb-8">
+            <p className="text-xl md:text-2xl parallax-content">
+              {subtitles[activeIndex]}
+            </p>
+          </ScrollAnimationObserver>
+          
+          <ScrollAnimationObserver animation="fade-up" delay={0.6}>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center parallax-content">
+              <Link to="https://wa.me/9455535193" target="_blank" className="neo-button interactive group">
+                <div className="neo-button-glow"></div>
+                <Calendar size={20} className="mr-2 group-hover:animate-pulse" />
+                Book Appointment
+              </Link>
+              <Link to="/treatments" className="glass-button interactive group">
+                <Sparkles size={20} className="mr-2 group-hover:animate-spin-slow" />
+                Explore Treatments
+              </Link>
+            </div>
+          </ScrollAnimationObserver>
         </div>
       </div>
       
       {/* Navigation Controls */}
-      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 z-20">
+      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 z-30">
         <button 
           onClick={handlePrev} 
-          className="w-12 h-12 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/50 transition-all duration-300"
+          className="neo-nav-button interactive left-4 group"
+          aria-label="Previous slide"
         >
-          <ArrowLeft size={24} />
+          <ArrowLeft size={24} className="group-hover:scale-110 transition-transform" />
         </button>
         <button 
           onClick={handleNext}
-          className="w-12 h-12 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/50 transition-all duration-300"
+          className="neo-nav-button interactive right-4 group"
+          aria-label="Next slide"
         >
-          <ArrowRight size={24} />
+          <ArrowRight size={24} className="group-hover:scale-110 transition-transform" />
         </button>
       </div>
       
       {/* Indicators */}
-      <div className="absolute bottom-6 inset-x-0 flex justify-center gap-2 z-20">
+      <div className="absolute bottom-6 inset-x-0 flex justify-center gap-2 z-30">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => setActiveIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === activeIndex ? 'bg-white w-6' : 'bg-white/50'
+            className={`transition-all duration-300 interactive ${
+              index === activeIndex 
+                ? 'w-10 h-2 bg-gradient-to-r from-[#1FB6FF] to-[#7E5BEF] rounded-full' 
+                : 'w-2 h-2 bg-white/40 rounded-full hover:bg-white/60'
             }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

@@ -1,16 +1,41 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { gsap } from 'gsap';
+import AnimatedLogo from './AnimatedLogo';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navRef = useRef<HTMLElement>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
+    tl.current = gsap.timeline({ paused: true });
+    const nav = navRef.current;
+    
+    if (nav) {
+      tl.current
+        .to(nav, { 
+          backgroundColor: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          padding: '8px 0',
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+    }
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+        tl.current?.play();
+      } else {
+        setIsScrolled(false);
+        tl.current?.reverse();
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -27,80 +52,73 @@ const Navbar: React.FC = () => {
 
   return (
     <nav 
+      ref={navRef}
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-2' : 'bg-transparent py-4'
+        isScrolled ? 'py-2' : 'py-4'
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2">
-          <img 
-            src="/lovable-uploads/8166bab8-053c-4b31-a7a8-a42ad05540ec.png" 
-            alt="Smile Care Dental Clinic Logo" 
-            className="h-12 md:h-14"
-          />
-        </Link>
+        <AnimatedLogo size={isScrolled ? 'sm' : 'md'} />
 
         <div className="hidden md:flex items-center space-x-8">
-          <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
-          <Link to="/about" className={`nav-link ${isActive('/about') ? 'active' : ''}`}>About Us</Link>
-          <Link to="/treatments" className={`nav-link ${isActive('/treatments') ? 'active' : ''}`}>Treatments</Link>
-          <Link to="/services" className={`nav-link ${isActive('/services') ? 'active' : ''}`}>Services</Link>
-          <Link to="/doctors" className={`nav-link ${isActive('/doctors') ? 'active' : ''}`}>Doctors</Link>
-          <Link to="/contact" className={`nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
+          {[
+            { path: '/', label: 'Home' },
+            { path: '/about', label: 'About Us' },
+            { path: '/treatments', label: 'Treatments' },
+            { path: '/services', label: 'Services' },
+            { path: '/doctors', label: 'Doctors' },
+            { path: '/contact', label: 'Contact' }
+          ].map((item) => (
+            <Link 
+              key={item.path} 
+              to={item.path} 
+              className={`nav-link interactive relative group overflow-hidden ${
+                isActive(item.path) ? 'active text-[#1FB6FF]' : 'text-[#2E2E2E] hover:text-[#1FB6FF]'
+              }`}
+            >
+              {item.label}
+              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#1FB6FF] to-[#7E5BEF] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"></span>
+            </Link>
+          ))}
         </div>
 
         <button 
-          className="md:hidden text-[#1FB6FF] focus:outline-none"
+          className="md:hidden text-[#1FB6FF] interactive focus:outline-none"
           onClick={toggleMobileMenu}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
         >
           <Menu size={24} />
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-white/90 backdrop-blur-md z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden`}>
+      <div className={`fixed inset-0 bg-dark/90 backdrop-blur-md z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-500 md:hidden`}>
         <div className="flex justify-end p-4">
-          <button onClick={toggleMobileMenu} className="text-[#1FB6FF]">
+          <button onClick={toggleMobileMenu} className="text-[#1FB6FF] interactive">
             <X size={24} />
           </button>
         </div>
         <div className="flex flex-col items-center justify-center h-full space-y-8">
-          <Link to="/" 
-            className={`text-xl ${isActive('/') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
-            onClick={toggleMobileMenu}
-          >
-            Home
-          </Link>
-          <Link to="/about" 
-            className={`text-xl ${isActive('/about') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
-            onClick={toggleMobileMenu}
-          >
-            About Us
-          </Link>
-          <Link to="/treatments" 
-            className={`text-xl ${isActive('/treatments') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
-            onClick={toggleMobileMenu}
-          >
-            Treatments
-          </Link>
-          <Link to="/services" 
-            className={`text-xl ${isActive('/services') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
-            onClick={toggleMobileMenu}
-          >
-            Services
-          </Link>
-          <Link to="/doctors" 
-            className={`text-xl ${isActive('/doctors') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
-            onClick={toggleMobileMenu}
-          >
-            Doctors
-          </Link>
-          <Link to="/contact" 
-            className={`text-xl ${isActive('/contact') ? 'text-[#1FB6FF]' : 'text-[#2E2E2E]'}`} 
-            onClick={toggleMobileMenu}
-          >
-            Contact
-          </Link>
+          {[
+            { path: '/', label: 'Home' },
+            { path: '/about', label: 'About Us' },
+            { path: '/treatments', label: 'Treatments' },
+            { path: '/services', label: 'Services' },
+            { path: '/doctors', label: 'Doctors' },
+            { path: '/contact', label: 'Contact' }
+          ].map((item, index) => (
+            <Link 
+              key={item.path} 
+              to={item.path} 
+              style={{animationDelay: `${index * 0.1}s`}}
+              className={`text-2xl mobile-nav-item ${
+                isActive(item.path) ? 'text-[#1FB6FF]' : 'text-white'
+              }`} 
+              onClick={toggleMobileMenu}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </div>
     </nav>
